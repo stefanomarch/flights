@@ -27,22 +27,22 @@ ActiveRecord::Schema.define(version: 2021_04_02_165859) do
   end
 
   create_table "flight_executions", force: :cascade do |t|
-    t.integer "flight_id_id", null: false
-    t.integer "user_id_id", null: false
+    t.integer "flight_id", null: false
+    t.integer "user_id", null: false
     t.datetime "date_of_execution"
-    t.integer "passenger_id_id", null: false
+    t.integer "passenger_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["flight_id_id"], name: "index_flight_executions_on_flight_id_id"
-    t.index ["passenger_id_id"], name: "index_flight_executions_on_passenger_id_id"
-    t.index ["user_id_id"], name: "index_flight_executions_on_user_id_id"
+    t.index ["flight_id"], name: "index_flight_executions_on_flight_id"
+    t.index ["passenger_id"], name: "index_flight_executions_on_passenger_id"
+    t.index ["user_id"], name: "index_flight_executions_on_user_id"
   end
 
   create_table "flights", force: :cascade do |t|
     t.integer "number"
     t.integer "airplane_id", null: false
-    t.integer "origin_airport_id_id", null: false
-    t.integer "destination_airport_id_id", null: false
+    t.integer "origin_airport_id", null: false
+    t.integer "destination_airport_id", null: false
     t.string "duration"
     t.datetime "departure_datetime"
     t.integer "capacity"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2021_04_02_165859) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["airplane_id"], name: "index_flights_on_airplane_id"
-    t.index ["destination_airport_id_id"], name: "index_flights_on_destination_airport_id_id"
-    t.index ["origin_airport_id_id"], name: "index_flights_on_origin_airport_id_id"
+    t.index ["destination_airport_id"], name: "index_flights_on_destination_airport_id"
+    t.index ["origin_airport_id"], name: "index_flights_on_origin_airport_id"
   end
 
   create_table "passengers", force: :cascade do |t|
@@ -73,10 +73,10 @@ ActiveRecord::Schema.define(version: 2021_04_02_165859) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "flight_executions", "flight_ids"
-  add_foreign_key "flight_executions", "passenger_ids"
-  add_foreign_key "flight_executions", "user_ids"
+  add_foreign_key "flight_executions", "flights"
+  add_foreign_key "flight_executions", "passengers"
+  add_foreign_key "flight_executions", "users"
   add_foreign_key "flights", "airplanes"
-  add_foreign_key "flights", "destination_airport_ids"
-  add_foreign_key "flights", "origin_airport_ids"
+  add_foreign_key "flights", "destination_airports"
+  add_foreign_key "flights", "origin_airports"
 end

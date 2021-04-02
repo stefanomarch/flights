@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  airplane: one
+  origin_airport_id: one
+  destination_airport_id: one
+  duration: MyString
+  departure_datetime: 2021-04-02 18:50:20
+  capacity: 1
+  avilables_seats: 1
+
+two:
+  number: 1
+  airplane: two
+  origin_airport_id: two
+  destination_airport_id: two
+  duration: MyString
+  departure_datetime: 2021-04-02 18:50:20
+  capacity: 1
+  avilables_seats: 1

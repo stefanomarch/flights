@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flight_id: one
+  user_id: one
+  date_of_execution: 2021-04-02 18:54:58
+  passenger_id: one
+
+two:
+  flight_id: two
+  user_id: two
+  date_of_execution: 2021-04-02 18:54:58
+  passenger_id: two

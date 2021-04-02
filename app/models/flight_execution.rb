@@ -1,5 +1,5 @@
 class FlightExecution < ApplicationRecord
-  belongs_to :flight_id
-  belongs_to :user_id
-  belongs_to :passenger_id
+  belongs_to :flight
+  belongs_to :user
+  has_many :passenger
 end

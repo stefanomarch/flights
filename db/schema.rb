@@ -10,26 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_215957) do
+ActiveRecord::Schema.define(version: 2021_04_02_164037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "airplanes", force: :cascade do |t|
     t.string "model"
-    t.string "company"
-    t.integer "rows"
-    t.integer "columns"
-    t.integer "avilables_seats"
+    t.integer "total_seats"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "airports", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.bigint "flight_execution_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "flight_execution_id", null: false
     t.integer "seats"
-    t.jsonb "passengers"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["flight_execution_id"], name: "index_bookings_on_flight_execution_id"
@@ -38,29 +42,32 @@ ActiveRecord::Schema.define(version: 2021_04_02_215957) do
 
   create_table "flight_executions", force: :cascade do |t|
     t.integer "number"
-    t.bigint "flight_id", null: false
     t.datetime "departure_datetime"
+    t.integer "available_seats"
+    t.bigint "airplane_id", null: false
+    t.bigint "flight_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["airplane_id"], name: "index_flight_executions_on_airplane_id"
     t.index ["flight_id"], name: "index_flight_executions_on_flight_id"
   end
 
   create_table "flights", force: :cascade do |t|
-    t.bigint "airplane_id", null: false
-    t.bigint "origin_id", null: false
-    t.bigint "destination_id", null: false
+    t.bigint "airport_destination_id"
+    t.bigint "airport_origin_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["airplane_id"], name: "index_flights_on_airplane_id"
-    t.index ["destination_id"], name: "index_flights_on_destination_id"
-    t.index ["origin_id"], name: "index_flights_on_origin_id"
+    t.index ["airport_destination_id"], name: "index_flights_on_airport_destination_id"
+    t.index ["airport_origin_id"], name: "index_flights_on_airport_origin_id"
   end
 
   create_table "passengers", force: :cascade do |t|
+    t.bigint "booking_id", null: false
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,6 +84,9 @@ ActiveRecord::Schema.define(version: 2021_04_02_215957) do
 
   add_foreign_key "bookings", "flight_executions"
   add_foreign_key "bookings", "users"
+  add_foreign_key "flight_executions", "airplanes"
   add_foreign_key "flight_executions", "flights"
-  add_foreign_key "flights", "airplanes"
+  add_foreign_key "flights", "airports", column: "airport_destination_id"
+  add_foreign_key "flights", "airports", column: "airport_origin_id"
+  add_foreign_key "passengers", "bookings"
 end

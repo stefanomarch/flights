@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_215957) do
   end
 
   create_table "flight_executions", force: :cascade do |t|
-
+    t.integer "number"
     t.bigint "flight_id", null: false
     t.datetime "departure_datetime"
     t.datetime "created_at", precision: 6, null: false
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2021_04_02_215957) do
   end
 
   create_table "flights", force: :cascade do |t|
-    t.integer "number"
     t.bigint "airplane_id", null: false
     t.bigint "origin_id", null: false
     t.bigint "destination_id", null: false

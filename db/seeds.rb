@@ -1,6 +1,5 @@
 require 'faker'
 
-
 # Airplane Seeds
 Airplane.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('airplanes')
@@ -149,19 +148,23 @@ ActiveRecord::Base.connection.reset_pk_sequence!('bookings')
 b1 = Booking.create!(
   user_id: 1,
   flight_execution_id: 2,
-  seats: 2)
+  seats: 2,
+  status: false)
 b2 = Booking.create!(
   user_id: 2,
   flight_execution_id: 4,
-  seats: 3)
+  seats: 3,
+  status: false)
 b3 = Booking.create!(
   user_id: 4,
   flight_execution_id: 2,
-  seats: 2)
+  seats: 2,
+  status: false)
 b4 = Booking.create!(
   user_id: 5,
   flight_execution_id: 3,
-  seats: 1)
+  seats: 1,
+  status: false)
 
 
 puts 'Booking seeds done 😎'

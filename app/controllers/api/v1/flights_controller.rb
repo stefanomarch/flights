@@ -7,15 +7,25 @@ module Api::V1
       render json: @flights.to_json(
         only: [:id, :airport_destination_id, :airport_origin_id],
         include: {
-        airport_destination: {only: [:code, :name, :country]},
-        airport_origin: {only: [:code, :name, :country]}
-      })
+                  airport_destination: { only: [:code, :name, :country] },
+                  airport_origin: { only: [:code, :name, :country] }
+                  })
     end
 
     def show
-      render json: @flight.to_json(include: :flight_executions)
+      render json: @flight.to_json(
+        only: [:id, :airport_destination_id, :airport_origin_id],
+        include: {
+                  flight_executions: { only: [:number,
+                                              :departure_datetime,
+                                              :available_seats,
+                                              :airplane_id],
+                                                include: {
+                                                  airplane: { only: [:id, :model, :total_seats] }
+                                                         }
+                                      }
+                  })
     end
-
 
   private
 

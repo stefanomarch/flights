@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_164037) do
     t.bigint "user_id", null: false
     t.bigint "flight_execution_id", null: false
     t.integer "seats"
+    t.boolean "status", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["flight_execution_id"], name: "index_bookings_on_flight_execution_id"

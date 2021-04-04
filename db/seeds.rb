@@ -90,7 +90,19 @@ f4 = Flight.create!(
   airport_destination_id: 2,
   airport_origin_id: 5 )
 f5 = Flight.create!(
+  airport_destination_id: 3,
+  airport_origin_id: 1 )
+f6 = Flight.create!(
+  airport_destination_id: 4,
+  airport_origin_id: 1 )
+f7 = Flight.create!(
   airport_destination_id: 8,
+  airport_origin_id: 1 )
+f8 = Flight.create!(
+  airport_destination_id: 2,
+  airport_origin_id: 1 )
+f9 = Flight.create!(
+  airport_destination_id: 7,
   airport_origin_id: 1 )
 
 puts 'Flight seeds done 😎'
@@ -98,7 +110,7 @@ puts 'Flight seeds done 😎'
 FlightExecution.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('flight_executions')
 
-20.times  do
+100.times  do
   FlightExecution.create!(
   number: Faker::Code.sin ,
   departure_datetime: Faker::Time.forward(days: 30,  period: :evening, format: :long),

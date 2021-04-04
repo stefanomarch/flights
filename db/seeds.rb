@@ -1,6 +1,5 @@
 require 'faker'
 
-
 # Airplane Seeds
 Airplane.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('airplanes')
@@ -90,7 +89,19 @@ f4 = Flight.create!(
   airport_destination_id: 2,
   airport_origin_id: 5 )
 f5 = Flight.create!(
+  airport_destination_id: 3,
+  airport_origin_id: 1 )
+f6 = Flight.create!(
+  airport_destination_id: 4,
+  airport_origin_id: 1 )
+f7 = Flight.create!(
   airport_destination_id: 8,
+  airport_origin_id: 1 )
+f8 = Flight.create!(
+  airport_destination_id: 2,
+  airport_origin_id: 1 )
+f9 = Flight.create!(
+  airport_destination_id: 7,
   airport_origin_id: 1 )
 
 puts 'Flight seeds done 😎'
@@ -98,10 +109,10 @@ puts 'Flight seeds done 😎'
 FlightExecution.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('flight_executions')
 
-20.times  do
+100.times  do
   FlightExecution.create!(
   number: Faker::Code.sin ,
-  departure_datetime: Faker::Time.forward(days: 30,  period: :evening, format: :long),
+  departure_datetime: Faker::Time.forward(days: 30, period: :evening, format: :long),
   airplane_id: rand(1..Airplane.count),
   flight_id: rand(1..Flight.count))
 end
@@ -137,19 +148,23 @@ ActiveRecord::Base.connection.reset_pk_sequence!('bookings')
 b1 = Booking.create!(
   user_id: 1,
   flight_execution_id: 2,
-  seats: 2)
+  seats: 2,
+  status: false)
 b2 = Booking.create!(
   user_id: 2,
   flight_execution_id: 4,
-  seats: 3)
+  seats: 3,
+  status: false)
 b3 = Booking.create!(
   user_id: 4,
   flight_execution_id: 2,
-  seats: 2)
+  seats: 2,
+  status: false)
 b4 = Booking.create!(
   user_id: 5,
   flight_execution_id: 3,
-  seats: 1)
+  seats: 1,
+  status: false)
 
 
 puts 'Booking seeds done 😎'

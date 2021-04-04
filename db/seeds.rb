@@ -113,7 +113,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!('flight_executions')
 100.times  do
   FlightExecution.create!(
   number: Faker::Code.sin ,
-  departure_datetime: Faker::Time.forward(days: 30,  period: :evening, format: :long),
+  departure_datetime: Faker::Time.forward(days: 30, period: :evening, format: :long),
   airplane_id: rand(1..Airplane.count),
   flight_id: rand(1..Flight.count))
 end

@@ -18,8 +18,8 @@ module Api::V1
         include: {
                   flight_executions: { only: [:number,
                                               :departure_datetime,
-                                              :available_seats,
-                                              :airplane_id],
+                                              :available_seats
+                                              ],
                                                 include: {
                                                   airplane: { only: [:id, :model, :total_seats] }
                                                          }

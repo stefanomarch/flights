@@ -106,14 +106,17 @@ f9 = Flight.create!(
 
 puts 'Flight seeds done 😎'
 
+
 FlightExecution.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('flight_executions')
 
 100.times  do
+  airplane = Airplane.order('RANDOM()').limit(1).first
   FlightExecution.create!(
-  number: Faker::Code.sin ,
+  number: Faker::Code.sin,
   departure_datetime: Faker::Time.forward(days: 30, period: :evening, format: :long),
-  airplane_id: rand(1..Airplane.count),
+  airplane_id: airplane.id,
+  available_seats: airplane.total_seats,
   flight_id: rand(1..Flight.count))
 end
 

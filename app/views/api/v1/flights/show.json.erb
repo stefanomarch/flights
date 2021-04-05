@@ -1,0 +1,15 @@
+ <%=
+  @flight.to_json(
+        only: :id,
+        include: {
+                    airport_destination: { only: [:code, :name, :country] },
+                    airport_origin: { only: [:code, :name, :country] },
+                    flight_executions: { only: [:number,
+                                                :departure_datetime,
+                                                :available_seats
+                                                ],
+                                                include: {
+                                                  airplane: { only: [:id, :model, :total_seats] }
+                                                         }
+                                        }
+                  }).html_safe %>

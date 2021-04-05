@@ -1,0 +1,19 @@
+ <%=
+     list.to_json(
+        only: [:id, :seats],
+        include: {
+                    flight_execution: { only: [:number,
+                                               :departure_datetime],
+                                                include: {
+                                                  airplane: { only: [:id, :model, :total_seats] },
+                                                  flight: { only: [:id],
+                                                    include: {
+                                                              airport_destination: { only: [:name, :country] },
+                                                              airport_origin: { only: [:name, :country] }
+                                                              }
+                                                          }
+                                                         }
+                    },
+                    passengers: { only: [:first_name, :last_name] },
+                  }).html_safe
+%>

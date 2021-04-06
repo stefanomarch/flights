@@ -5,12 +5,6 @@ module Api::V1
     def search
       @flight = params[:flight]
       @flights = Flight.search_by_origin_or_destination(@flight)
-      render json: @flights.to_json(only: :id,
-                    include: {
-                                airport_destination: { only: [:code, :name, :country] },
-                                airport_origin: { only: [:code, :name, :country] }
-                              })
-
     end
 
     def index

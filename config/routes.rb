@@ -4,12 +4,11 @@ Rails.application.routes.draw do
    namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get '/flights', to: 'flights#index'
-      get '/flights/search', to: 'flights#search'
+      get '/flights/search/:flight', to: 'flights#search'
       get '/flights/:id', to: 'flights#show'
       post '/flights/:id/book', to: 'bookings#create'
-      get '/bookings' , to: 'bookings#index'
-      get '/bookings/:id' , to: 'bookings#show'
-
+      get '/bookings', to: 'bookings#index'
+      get '/bookings/:id', to: 'bookings#show'
     end
   end
 end

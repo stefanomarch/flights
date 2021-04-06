@@ -10,12 +10,10 @@ module Api::V1
       @booking = Booking.new
       @booking.user_id = current_user.id
       @flight_execution = FlightExecution.find(params[:id])
-
       params = passengers_params
       num_passengers = params[:passengers].count
       render_error('enter at least one passenger') if num_passengers.zero?
       render_error('not enough availables seats') if @flight_execution.available_seats < num_passengers
-
       @booking.flight_execution_id = @flight_execution.id
 
       if @booking.save!
@@ -55,6 +53,5 @@ module Api::V1
       render json: { error: error },
       status: :unprocessable_entity
     end
-
   end
 end

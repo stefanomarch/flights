@@ -1,0 +1,8 @@
+<%=
+     @flights.to_json(
+        only: :id,
+        include: {
+                    airport_destination: { only: [:code, :name, :country] },
+                    airport_origin: { only: [:code, :name, :country] }
+                  }).html_safe
+%>

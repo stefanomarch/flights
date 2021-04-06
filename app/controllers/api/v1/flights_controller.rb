@@ -3,16 +3,21 @@ module Api::V1
     before_action :set_flight, only: [:show]
 
     def search
-      @flights = Flight.global_search(params[:query])
-      render json: @flights.to_json
+      @flight = params[:flight]
+      @flights = Flight.search_by_origin_or_destination(@flight)
+      render json: @flights.to_json(only: :id,
+                    include: {
+                                airport_destination: { only: [:code, :name, :country] },
+                                airport_origin: { only: [:code, :name, :country] }
+                              })
+
     end
 
     def index
       @flights = Flight.all
     end
 
-    def show
-    end
+    def show;end
 
   private
 

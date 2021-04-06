@@ -5,12 +5,11 @@ class Flight < ApplicationRecord
   has_many :flight_executions
 
   include PgSearch::Model
-  pg_search_scope :global_search,
+  pg_search_scope :search_by_origin_or_destination,
                   associated_against: {
-                    flight_execution: [:departure_date]
-                    # flight: [:airport_origin, :airport_destination]
-                  },
+                    airport_destination: [:name, :country],
+                    airport_origin: [:name, :country]},
                   using: {
                     tsearch: { prefix: true }
                   }
-end
+  end

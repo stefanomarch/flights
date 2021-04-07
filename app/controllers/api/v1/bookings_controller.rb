@@ -15,6 +15,7 @@ module Api::V1
       render_error('enter at least one passenger') if num_passengers.zero?
       render_error('not enough availables seats') if @flight_execution.available_seats < num_passengers
       @booking.flight_execution_id = @flight_execution.id
+      @booking.seats = 0
 
       if @booking.save!
         params[:passengers].each do |passenger|

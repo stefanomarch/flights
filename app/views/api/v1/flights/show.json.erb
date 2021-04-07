@@ -1,10 +1,12 @@
+
  <%=
   @flight.to_json(
         only: :id,
         include: {
                     airport_destination: { only: [:code, :name, :country] },
                     airport_origin: { only: [:code, :name, :country] },
-                    flight_executions: { only: [:number,
+                    flight_executions: { only: [:id,
+                                                :number,
                                                 :departure_datetime,
                                                 :available_seats
                                                 ],

@@ -11,7 +11,8 @@ module Api::V1
       @flights = Flight.all
     end
 
-    def show;end
+    def show;
+    end
 
   private
 
